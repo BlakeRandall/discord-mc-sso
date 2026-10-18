@@ -1,0 +1,14 @@
+{
+  "name": "discord-sso-bff",
+  "version": "1.0.0",
+  "private": true,
+  "engines": { "node": ">=20" },
+  "workspaces": ["client", "server"],
+  "scripts": {
+    "dev": "concurrently -n api,web \"npm run dev -w server\" \"npm run dev -w client\"",
+    "build": "npm run build -w client && npm run build -w server",
+    "typecheck": "npm run typecheck --workspaces",
+    "start": "npm run start -w server"
+  },
+  "devDependencies": { "concurrently": "^9.0.0" }
+}

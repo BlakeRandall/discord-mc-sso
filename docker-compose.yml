@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    network_mode: host
+    environment:
+      NODE_ENV: ${NODE_ENV:-production}
+      MONGODB_URI: mongodb://127.0.0.1:27017/discord_sso
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:7
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
